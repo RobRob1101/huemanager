@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        function lightswitch(bool){
+            fetch('http://192.168.1.108/api/pBla01jkMV4oK3eBX4k7pzj17-Uy6j8UgCt4hPBM/lights/1/state', {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({"on": bool})
+            })
+            .then((response) => response.json())
+            .then(json => console.log(json))
+            .catch(error => {
+                console.error('Error:', error);
+            });
+        }
+    </script>
+
+    </head>
+<body>
+
+    <button onclick="lightswitch(true)">Lighton</button>
+    <button onclick="lightswitch(false)">Lightoff</button>
+    
+</body>
+</html>
