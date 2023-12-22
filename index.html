@@ -6,7 +6,7 @@
     <title>Document</title>
     <script>
         function lightswitch(bool){
-            fetch('http://192.168.1.108/api/pBla01jkMV4oK3eBX4k7pzj17-Uy6j8UgCt4hPBM/lights/1/state', {
+            fetch('http://192.168.1.108/api/N8XEfqFFnzGK7rF6XAfFvOmTQql06sqNwKkgi9Qf/lights/1/state', {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',
@@ -16,9 +16,23 @@
             .then((response) => response.json())
             .then(json => console.log(json))
             .catch(error => {
-                console.error('Error:', error);
+                console.error('fetch Error:', error);
             });
         }
+
+        function tuya(){
+            fetch('https://hueapi.steinerr06.repl.co/returnjson', {
+                method: "GET", 
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+            }).then((response) => response.json())
+            .then(json => console.log(json))
+            .catch(error => {
+                console.error('fetch Error:', error);
+            }); 
+        }
+
     </script>
 
     </head>
@@ -26,6 +40,21 @@
 
     <button onclick="lightswitch(true)">Lighton</button>
     <button onclick="lightswitch(false)">Lightoff</button>
+
+    <button onclick="tuya()">tuya</button>
     
 </body>
 </html>
+
+
+
+
+
+
+
+
+
+
+
+
+
