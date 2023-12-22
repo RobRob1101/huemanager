@@ -20,8 +20,8 @@
             });
         }
 
-        function tuya(){
-            fetch('https://hueapi.steinerr06.repl.co/returnjson', {
+        function tuyaon(){
+            fetch('https://hueapi.steinerr06.repl.co/lighton', {
                 method: "GET", 
                 headers: {
                     'Content-Type': 'application/json',
@@ -29,9 +29,21 @@
             }).then((response) => response.json())
             .then(json => console.log(json))
             .catch(error => {
-                console.error('fetch Error:', error);
             }); 
-        }
+        }    console.error('fetch Error:', error);
+        function tuyaoff(){
+            fetch('https://hueapi.steinerr06.repl.co/lightoff', {
+                method: "GET", 
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+            }).then((response) => response.json())
+            .then(json => console.log(json))
+            .catch(error => {
+            }); 
+        }    console.error('fetch Error:', error);
+            
+
 
     </script>
 
@@ -41,7 +53,8 @@
     <button onclick="lightswitch(true)">Lighton</button>
     <button onclick="lightswitch(false)">Lightoff</button>
 
-    <button onclick="tuya()">tuya</button>
+    <button onclick="tuyaon()">tuyaon</button>
+    <button onclick="tuyaoff()">tuyaoff</button>
     
 </body>
 </html>
