@@ -4,66 +4,29 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <script>
-        function lightswitch(bool){
-            fetch('http://192.168.1.108/api/N8XEfqFFnzGK7rF6XAfFvOmTQql06sqNwKkgi9Qf/lights/1/state', {
-                method: 'PUT',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({"on": bool})
-            })
-            .then((response) => response.json())
-            .then(json => console.log(json))
-            .catch(error => {
-                console.error('fetch Error:', error);
-            });
-        }
-
-        function tuyaon(){
-            fetch('https://hueapi.steinerr06.repl.co/lighton', {
-                method: "GET", 
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-            }).then((response) => response.json())
-            .then(json => console.log(json))
-            .catch(error => {
-            }); 
-        }    console.error('fetch Error:', error);
-        function tuyaoff(){
-            fetch('https://hueapi.steinerr06.repl.co/lightoff', {
-                method: "GET", 
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-            }).then((response) => response.json())
-            .then(json => console.log(json))
-            .catch(error => {
-            }); 
-        }    console.error('fetch Error:', error);
-            
-
-
-    </script>
+    <link rel="stylesheet" href="stylesheet.css">
+    <script src="code.js"></script>
 
     </head>
 <body>
 
-    <button onclick="lightswitch(true)">Lighton</button>
-    <button onclick="lightswitch(false)">Lightoff</button>
+
+    <label class="switch" >
+        <input type="checkbox" id="hueswitch" oninput="hueswitch()">
+        <span class="slider round"></span>
+    </label>
+
+
+    
+
+    <!-- <button onclick="hueswitch(true)">Lighton</button>
+    <button onclick="hueswitch(false)">Lightoff</button> -->
 
     <button onclick="tuyaon()">tuyaon</button>
     <button onclick="tuyaoff()">tuyaoff</button>
     
 </body>
 </html>
-
-
-
-
-
-
 
 
 
