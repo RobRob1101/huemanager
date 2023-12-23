@@ -9,6 +9,23 @@ window.addEventListener("load", (event) => {
     hueslide = document.getElementById("hueswitch")
     tuyaslide = document.getElementById("tuyaswitch")
 
+    let query = window.location.search.match(/\?mode\=(both|hue|tuya)$/)
+
+    let wrongurl
+    if(query == null){
+        wrongurl = true
+    }else{
+        wrongurl = false
+    }
+    
+    if(wrongurl){
+        window.location.href = "/?mode=both"
+    }
+
+    selectmode()
+
+
+
     fetch('http://192.168.1.108/api/N8XEfqFFnzGK7rF6XAfFvOmTQql06sqNwKkgi9Qf/lights/1', {
         method: 'GET',
         headers: {
@@ -23,9 +40,26 @@ window.addEventListener("load", (event) => {
     .catch(error => {
         console.error('fetch Error:', error);
     });
+
+    
+    fetch('https://hueapi.steinerr06.repl.co/lightstatus', {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+    })
+    .then((response) => response.json())
+    .then(json => {
+        tuyastate = json.value
+        tuyaslide.checked = tuyastate
+    })
+    .catch(error => {
+        console.error('fetch Error:', error);
+    });
+    
     
 
-    console.log(huestate)
+
 })
 
 
@@ -47,9 +81,9 @@ function hueswitch(){
 
 
 
-function tuyaswitch(bool){
+function tuyaswitch(){
     let url = "https://hueapi.steinerr06.repl.co/lightoff" 
-    if(bool){ url = 'https://hueapi.steinerr06.repl.co/lighton'}
+    if(tuyaslide.checked){ url = 'https://hueapi.steinerr06.repl.co/lighton'}
 
     fetch(url , {
         method: "GET", 
@@ -60,3 +94,13 @@ function tuyaswitch(bool){
     .then(json => console.log(json))
     .catch(error => {console.error('fetch Error:', error);}); 
 }    
+
+
+
+
+function selectmode(){
+    mode = window.location.search.match(/(both|hue|tuya)/)[0]
+
+    console.log(mode)
+
+}

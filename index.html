@@ -11,19 +11,41 @@
 <body>
 
 
-    <label class="switch" >
-        <input type="checkbox" id="hueswitch" oninput="hueswitch()">
-        <span class="slider round"></span>
-    </label>
+    <main>
+        <nav>
+            <button>Hue</button>
+            <button>Tuya</button>
+            <button>Both</button>
+
+        </nav>
+
+        <label class="switch" >
+            <input type="checkbox" id="hueswitch" oninput="hueswitch()">
+            <span class="slider round"></span>
+        </label>
+    
+    
+        <label class="switch" >
+            <input type="checkbox" id="tuyaswitch" oninput="tuyaswitch()">
+            <span class="slider round"></span>
+        </label>
+    </main>
+
+    
+
+
+
 
 
     
 
+
+
     <!-- <button onclick="hueswitch(true)">Lighton</button>
     <button onclick="hueswitch(false)">Lightoff</button> -->
 
-    <button onclick="tuyaon()">tuyaon</button>
-    <button onclick="tuyaoff()">tuyaoff</button>
+    <!-- <button onclick="tuyaon()">tuyaon</button>
+    <button onclick="tuyaoff()">tuyaoff</button> -->
     
 </body>
 </html>

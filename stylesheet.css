@@ -1,3 +1,31 @@
+ body{
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    background-color: lightblue;
+    
+ }
+
+ nav{
+    padding: 1em;
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    background-color: grey;
+ }
+
+ main{
+    background-color: white;
+    width: 33%;
+    height: 100%;
+ }
+
+
+ 
+ 
  /* The switch - the box around the slider */
  .switch {
     position: relative;
