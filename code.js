@@ -3,6 +3,7 @@ let tuyastate
 
 let hueslide
 let tuyaslide
+let bothslide
 
 let bothbutton
 let huebutton
@@ -14,7 +15,7 @@ let tuyacontent
 
 
 
-window.addEventListener("load", (event) => {
+window.addEventListener("load", async (event) => {
     bothbutton = document.getElementById("bothbutton")
     huebutton = document.getElementById("huebutton")
     tuyabutton = document.getElementById("tuyabutton")
@@ -25,6 +26,8 @@ window.addEventListener("load", (event) => {
 
     hueslide = document.getElementById("hueswitch")
     tuyaslide = document.getElementById("tuyaswitch")
+    bothslide = document.getElementById("bothswitch")
+
 
     let query = window.location.search.match(/\?mode\=(both|hue|tuya)$/)
 
@@ -38,12 +41,10 @@ window.addEventListener("load", (event) => {
     if(wrongurl){
         window.location.href = "/?mode=both"
     }
-
     selectmode()
 
 
-
-    fetch('http://192.168.1.108/api/N8XEfqFFnzGK7rF6XAfFvOmTQql06sqNwKkgi9Qf/lights/1', {
+    await fetch('http://192.168.1.108/api/N8XEfqFFnzGK7rF6XAfFvOmTQql06sqNwKkgi9Qf/lights/1', {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json',
@@ -59,7 +60,7 @@ window.addEventListener("load", (event) => {
     });
 
     
-    fetch('https://hueapi.steinerr06.repl.co/lightstatus', {
+    await fetch('https://hueapi.steinerr06.repl.co/lightstatus', {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json',
@@ -76,6 +77,13 @@ window.addEventListener("load", (event) => {
     
     
 
+    console.log(tuyastate, huestate)
+    if(tuyastate && huestate){
+        bothslide.checked = true;
+    }else{
+        bothslide.checked = false;
+    }
+
 
 })
 
@@ -89,8 +97,6 @@ function hueswitch(){
         },
         body: JSON.stringify({"on": hueslide.checked})
     })
-    .then((response) => response.json())
-    .then(json => console.log(json))
     .catch(error => {
         console.error('fetch Error:', error);
     });
@@ -112,13 +118,37 @@ function tuyaswitch(){
     .catch(error => {console.error('fetch Error:', error);}); 
 }    
 
+function bothswitch(){
+    fetch('http://192.168.1.108/api/N8XEfqFFnzGK7rF6XAfFvOmTQql06sqNwKkgi9Qf/lights/1/state', {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({"on": bothslide.checked})
+    })
+    .catch(error => {
+        console.error('fetch Error:', error);
+    });
+
+
+    let url = "https://hueapi.steinerr06.repl.co/lightoff" 
+    if(bothslide.checked){ url = 'https://hueapi.steinerr06.repl.co/lighton'}
+    fetch(url , {
+        method: "GET", 
+        headers: {
+            'Content-Type': 'application/json',
+        },
+    }).then((response) => response.json())
+    .then(json => console.log(json))
+    .catch(error => {console.error('fetch Error:', error);}); 
+
+}
+
 
 
 
 function selectmode(){
     mode = window.location.search.match(/(both|hue|tuya)/)[0]
-
-    console.log(mode)
     
     if(mode == "both"){
         bothbutton.style.backgroundColor = "red"
