@@ -76,8 +76,6 @@ window.addEventListener("load", async (event) => {
     });
     
     
-
-    console.log(tuyastate, huestate)
     if(tuyastate && huestate){
         bothslide.checked = true;
     }else{
@@ -101,6 +99,27 @@ function hueswitch(){
         console.error('fetch Error:', error);
     });
 }
+
+function huecolor(){
+    let col = RGBtoHUE(0, 0 ,255)   
+    let value = [col.x, col.y]
+
+    console.log(value)
+
+    fetch('http://192.168.1.108/api/N8XEfqFFnzGK7rF6XAfFvOmTQql06sqNwKkgi9Qf/lights/1/state', {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({"xy": value})
+    })
+    .catch(error => {
+        console.error('fetch Error:', error);
+    });
+
+
+}
+
 
 
 
@@ -163,4 +182,48 @@ function selectmode(){
         tuyacontent.style.display = "block"
     }
 
+}
+
+
+
+function RGBtoHUE(r, g, b){
+    //https://stackoverflow.com/questions/22564187/rgb-to-philips-hue-hsb
+
+    r = r / 255
+    g = g / 255
+    b = b / 255
+    
+    console.log(r, g, b)
+
+
+    // Make red more vivid
+    if (r > 0.04045) {
+        red = Math.pow((r + 0.055) / (1.0 + 0.055), 2.4);
+    } else {
+        red = r / 12.92;
+    }
+
+    // Make green more vivid
+    if (g > 0.04045) {
+        green = Math.pow((g + 0.055) / (1.0 + 0.055), 2.4);
+    } else {
+        green = g / 12.92;
+    }
+
+    // Make blue more vivid
+    if (b > 0.04045) {
+        blue = Math.pow((b + 0.055) / (1.0 + 0.055), 2.4);
+    } else {
+        blue = b / 12.92;
+    }
+
+    const X = red * 0.649926 + green * 0.103455 + blue * 0.197109;
+    const Y = red * 0.234327 + green * 0.743075 + blue * 0.022598;
+    const Z = red * 0.0000000 + green * 0.053077 + blue * 1.035763;
+
+    const x = X / (X + Y + Z);
+    const y = Y / (X + Y + Z);
+
+    return {x: x, y: y};
+    
 }
