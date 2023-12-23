@@ -8,11 +8,20 @@ let bothbutton
 let huebutton
 let tuyabutton
 
+let bothcontent
+let huecontent
+let tuyacontent
+
+
 
 window.addEventListener("load", (event) => {
     bothbutton = document.getElementById("bothbutton")
     huebutton = document.getElementById("huebutton")
     tuyabutton = document.getElementById("tuyabutton")
+
+    bothcontent = document.getElementById("bothcontent")
+    huecontent = document.getElementById("huecontent")
+    tuyacontent = document.getElementById("tuyacontent")
 
     hueslide = document.getElementById("hueswitch")
     tuyaslide = document.getElementById("tuyaswitch")
@@ -113,13 +122,15 @@ function selectmode(){
     
     if(mode == "both"){
         bothbutton.style.backgroundColor = "red"
-        
+        bothcontent.style.display = "block"
 
 
     }else if(mode == "hue"){
         huebutton.style.backgroundColor = "red"
+        huecontent.style.display = "block"
     }else if(mode == "tuya"){
         tuyabutton.style.backgroundColor = "red"
+        tuyacontent.style.display = "block"
     }
 
 }
