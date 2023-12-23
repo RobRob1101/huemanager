@@ -13,23 +13,47 @@
 
     <main>
         <nav>
-            <button>Hue</button>
-            <button>Tuya</button>
-            <button>Both</button>
+
+            <a id="bothbutton" href="/?mode=both">Both</a>
+            <a id="huebutton" href="/?mode=hue">Hue</a>
+            <a id="tuyabutton" href="/?mode=tuya">Tuya</a>
+            
 
         </nav>
 
-        <label class="switch" >
-            <input type="checkbox" id="hueswitch" oninput="hueswitch()">
-            <span class="slider round"></span>
-        </label>
+
+        <div id="bothcontent">
+            both
+
+        </div>
+
+        <div id="huecontent" class="content">
+            hue
+            <label class="switch" >
+                <input type="checkbox" id="hueswitch" oninput="hueswitch()">
+                <span class="slider round"></span>
+            </label>
+        </div>
+
+        <div id="tuyacontent" class="content">
+            tuya
+            <label class="switch" >
+                <input type="checkbox" id="tuyaswitch" oninput="tuyaswitch()">
+                <span class="slider round"></span>
+            </label>
+        </div>
+
+
+
+
+        
     
     
-        <label class="switch" >
-            <input type="checkbox" id="tuyaswitch" oninput="tuyaswitch()">
-            <span class="slider round"></span>
-        </label>
+        
     </main>
+
+
+
 
     
 
