@@ -184,8 +184,35 @@ function bothswitch(){
     }).then((response) => response.json())
     .then(json => console.log(json))
     .catch(error => {console.error('fetch Error:', error);}); 
-
 }
+function bothcolor(){
+    let col = hexToRgb(bothcolorpicker.value)
+
+    let value = RGBtoHUE(col.r, col.g ,col.b)   
+    value = [value.x, value.y]
+
+    fetch('http://192.168.1.108/api/N8XEfqFFnzGK7rF6XAfFvOmTQql06sqNwKkgi9Qf/lights/1/state', {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({"xy": value})
+    })
+    .catch(error => {
+        console.error('fetch Error:', error);
+    });
+
+
+    let url = `https://hueapi.steinerr06.repl.co/lightcolor/${col.r}/${col.g}/${col.b}`
+    fetch(url , {
+        method: "GET", 
+        headers: {
+            'Content-Type': 'application/json',
+        },
+    })
+    .catch(error => {console.error('fetch Error:', error);}); 
+}
+
 
 
 
