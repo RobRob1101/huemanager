@@ -13,6 +13,10 @@ let bothcontent
 let huecontent
 let tuyacontent
 
+let huecolorpicker
+let tuyacolorpicker
+let bothcolorpicker
+
 
 
 window.addEventListener("load", async (event) => {
@@ -27,6 +31,10 @@ window.addEventListener("load", async (event) => {
     hueslide = document.getElementById("hueswitch")
     tuyaslide = document.getElementById("tuyaswitch")
     bothslide = document.getElementById("bothswitch")
+
+    huecolorpicker = document.getElementById("huecolorpicker")
+    tuyacolorpicker = document.getElementById("tuyacolorpicker")
+    bothcolorpicker = document.getElementById("bothcolorpicker")
 
 
     let query = window.location.search.match(/\?mode\=(both|hue|tuya)$/)
@@ -101,10 +109,10 @@ function hueswitch(){
 }
 
 function huecolor(){
-    let col = RGBtoHUE(0, 0 ,255)   
+    console.log(huecolorpicker.value)
+    let col = hexToRgb(huecolorpicker.value)
+    col = RGBtoHUE(col.r, col.g ,col.b)   
     let value = [col.x, col.y]
-
-    console.log(value)
 
     fetch('http://192.168.1.108/api/N8XEfqFFnzGK7rF6XAfFvOmTQql06sqNwKkgi9Qf/lights/1/state', {
         method: 'PUT',
@@ -116,8 +124,6 @@ function huecolor(){
     .catch(error => {
         console.error('fetch Error:', error);
     });
-
-
 }
 
 
@@ -227,3 +233,16 @@ function RGBtoHUE(r, g, b){
     return {x: x, y: y};
     
 }
+
+
+function hexToRgb(hex) {
+    var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+
+    console.log(hex, result)
+
+    return result ? {
+      r: parseInt(result[1], 16),
+      g: parseInt(result[2], 16),
+      b: parseInt(result[3], 16)
+    } : null;
+  }
