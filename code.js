@@ -178,7 +178,7 @@ function tuyacolor(){
     .catch(error => {console.error('fetch Error:', error);}); 
     
 }
-    
+
 
 
 
