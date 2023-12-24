@@ -109,7 +109,6 @@ function hueswitch(){
 }
 
 function huecolor(){
-    console.log(huecolorpicker.value)
     let col = hexToRgb(huecolorpicker.value)
     col = RGBtoHUE(col.r, col.g ,col.b)   
     let value = [col.x, col.y]
@@ -142,6 +141,25 @@ function tuyaswitch(){
     .then(json => console.log(json))
     .catch(error => {console.error('fetch Error:', error);}); 
 }    
+
+function tuyacolor(){
+    let col = hexToRgb(tuyacolorpicker.value)
+    let url = `https://hueapi.steinerr06.repl.co/lightcolor/${col.r}/${col.g}/${col.b}`
+
+    fetch(url , {
+        method: "GET", 
+        headers: {
+            'Content-Type': 'application/json',
+        },
+    }).then((response) => response.json())
+    .then(json => console.log(json))
+    .catch(error => {console.error('fetch Error:', error);}); 
+    
+}
+    
+
+
+
 
 function bothswitch(){
     fetch('http://192.168.1.108/api/N8XEfqFFnzGK7rF6XAfFvOmTQql06sqNwKkgi9Qf/lights/1/state', {
