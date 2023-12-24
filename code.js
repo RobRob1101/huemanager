@@ -17,6 +17,10 @@ let huecolorpicker
 let tuyacolorpicker
 let bothcolorpicker
 
+let huebrightslider
+let tuyabrightslider
+let bothbrightslider
+
 
 
 window.addEventListener("load", async (event) => {
@@ -35,6 +39,10 @@ window.addEventListener("load", async (event) => {
     huecolorpicker = document.getElementById("huecolorpicker")
     tuyacolorpicker = document.getElementById("tuyacolorpicker")
     bothcolorpicker = document.getElementById("bothcolorpicker")
+
+    huebrightslider = document.getElementById("huebright")
+    tuyabrightslider = document.getElementById("tuyabright")
+    bothbrightslider = document.getElementById("bothbright")
 
 
     let query = window.location.search.match(/\?mode\=(both|hue|tuya)$/)
@@ -119,6 +127,20 @@ function huecolor(){
             'Content-Type': 'application/json',
         },
         body: JSON.stringify({"xy": value})
+    })
+    .catch(error => {
+        console.error('fetch Error:', error);
+    });
+}
+
+function huebright(){
+    console.log(huebrightslider.value)
+    fetch('http://192.168.1.108/api/N8XEfqFFnzGK7rF6XAfFvOmTQql06sqNwKkgi9Qf/lights/1/state', {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({"bri": parseInt(huebrightslider.value)})
     })
     .catch(error => {
         console.error('fetch Error:', error);

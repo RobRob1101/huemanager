@@ -94,3 +94,11 @@
   .slider.round:before {
     border-radius: 50%;
   } 
+
+  .slidecontainer{
+    position: relative;
+  }
+
+
+
+  
