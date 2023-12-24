@@ -243,16 +243,16 @@ function selectmode(){
     mode = window.location.search.match(/(both|hue|tuya)/)[0]
     
     if(mode == "both"){
-        bothbutton.style.backgroundColor = "red"
-        bothcontent.style.display = "block"
+        bothbutton.style.backgroundColor = "#5d6d7e"
+        bothcontent.style.display = "flex"
 
 
     }else if(mode == "hue"){
-        huebutton.style.backgroundColor = "red"
-        huecontent.style.display = "block"
+        huebutton.style.backgroundColor = "#5d6d7e"
+        huecontent.style.display = "flex"
     }else if(mode == "tuya"){
-        tuyabutton.style.backgroundColor = "red"
-        tuyacontent.style.display = "block"
+        tuyabutton.style.backgroundColor = "#5d6d7e"
+        tuyacontent.style.display = "flex"
     }
 
 }
