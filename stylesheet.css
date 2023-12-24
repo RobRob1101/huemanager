@@ -16,6 +16,7 @@
     justify-content: space-around;
     align-items: center;
     background-color:  #1b2631 ;
+    margin-bottom: 2em;
  }
 
  main{
@@ -41,8 +42,10 @@
  .switch {
     position: relative;
     display: inline-block;
-    width: 60px;
-    height: 34px;
+    width: 8em;
+    height: 4em;
+    
+    margin: 1em;
   }
   
   /* Hide default HTML checkbox */
@@ -68,10 +71,13 @@
   .slider:before {
     position: absolute;
     content: "";
-    height: 26px;
-    width: 26px;
-    left: 4px;
-    bottom: 4px;
+
+
+    height: 3em;
+    width: 3em;
+    left: 0.5em;
+    bottom: 0.5em;
+
     background-color: white;
     -webkit-transition: .4s;
     transition: .4s;
@@ -86,9 +92,9 @@
   }
   
   input:checked + .slider:before {
-    -webkit-transform: translateX(26px);
-    -ms-transform: translateX(26px);
-    transform: translateX(26px);
+    -webkit-transform: translateX(4em);
+    -ms-transform: translateX(4em);
+    transform: translateX(4em);
   }
   
   /* Rounded sliders */
@@ -102,8 +108,14 @@
 
   .slidecontainer{
     position: relative;
+    width: 10em;
   }
 
+.colorpicker{
+  width: 10em;
+  height: 15em;
+  margin: 2em;
+}
 
 
 
@@ -135,4 +147,5 @@ a:visited {
 a:hover {
   background-color:  #aeb6bf ;
 }
+
 
